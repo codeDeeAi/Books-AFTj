@@ -6,27 +6,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state: {
-        counter: 1000,
-        user: false,
-        role: false,
-        userPermissions: false,
+        token: localStorage.token,
     },
     getters: {
-        getUserPermission(state) {
-            return state.userPermissions
-        }
-    },
-    mutations: {
-        updateUser(state, data) {
-            state.user = data
-        },
-        updateUserPermissions(state, data) {
-            state.userPermissions = data
-        },
-        updateUserRole(state, data) {
-            state.role = data
+        getToken(state) {
+            return state.token
         },
     },
+    mutations: {},
     actions: {
 
     }

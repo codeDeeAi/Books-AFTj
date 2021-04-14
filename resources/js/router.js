@@ -6,14 +6,15 @@ Vue.use(Router);
 
 // Import components
 // Home
-import home from './components/views/homepage'
-// Login
-import login from './components/views/login'
-// Dashboard
-import dashboard from './components/views/dashboard'
-// Users
-import users from './components/views/users/users'
-
+import home from "./components/views/homepage";
+// Auth
+import login from "./components/views/auth/login";
+import signup from "./components/views/auth/signup";
+// Books
+import books from "./components/views/admin/books";
+import book from "./components/views/admin/book";
+// 404
+import error from "./components/views/404/404";
 
 const routes = [{
         path: "/",
@@ -26,18 +27,25 @@ const routes = [{
         component: login
     },
     {
-        path: "/dashboard",
-        name: "dashboard",
-        component: dashboard,
-        children: [{
-                path: "/users",
-                name: "users",
-                component: users,
-            },
-
-        ]
+        path: "/signup",
+        name: "signup",
+        component: signup
     },
-
+    {
+        path: "/books",
+        name: "books",
+        component: books
+    },
+    {
+        path: "/book-:title-:id",
+        name: "book",
+        component: book
+    },
+    {
+        path: "*",
+        name: "404",
+        component: error
+    }
 ];
 
 export default new Router({

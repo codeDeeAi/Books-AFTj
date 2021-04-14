@@ -14,8 +14,11 @@ export default {
                 return await axios({
                     method: method,
                     url: url,
-                    data: dataObj
-
+                    data: dataObj,
+                    headers: {
+                        'Authorization': this.getToken,
+                        'Bearer': this.getUser,
+                    }
                 });
             } catch (error) {
                 return error.response
@@ -53,43 +56,14 @@ export default {
                 // all of other options may go here
             });
         },
-
-
-        checkUserPermission(key) {
-            if (!this.userPermission) return true
-            let isPermitted = false;
-            for (let d of this.userPermission) {
-                if (this.$route.name == d.name) {
-                    if (d[key]) {
-                        isPermitted = true
-                        break;
-                    } else {
-                        break
-                    }
-                }
-
-            }
-            return isPermitted
-        }
     },
 
     // CRUD Permissions
     computed: {
-        ...mapGetters({
-            'userPermission': 'getUserPermission'
-        }),
-        permitRead() {
-            return this.checkUserPermission('read')
-        },
-        permitWrite() {
-            return this.checkUserPermission('write')
-        },
-        permitUpdate() {
-            return this.checkUserPermission('update')
-        },
-        permitDelete() {
-            return this.checkUserPermission('delete')
-        },
+        ...mapGetters([
+            'getToken',
+            'getUser',
+        ]),
     },
 
 }
